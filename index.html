@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="miss.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <button id="btn">Bé nhấn vô đây ii</button>
+    </div>
+
+    <script>
+        // Hàm tạo vị trí ngẫu nhiên
+        function getRandomPosition() {
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+            const x = Math.random() * (screenWidth - 200); // Giới hạn chiều rộng
+            const y = Math.random() * (screenHeight - 100); // Giới hạn chiều cao
+            return { x, y };
+        }
+
+        // Hàm tạo và trả về một phần tử .nav
+        function createNavElement() {
+            const nav = document.createElement("div");
+            nav.classList.add("nav");
+            nav.innerHTML = `
+                <div class="header_nav">
+                    <img src="/miss/heart.png" alt="" id="heart" style="float: left;">
+                    <div style="float: right;">
+                        <img src="/miss/line.png" alt="" id="line">
+                        <img src="/miss/maximize.png" alt="" id="maximize">
+                        <img src="/miss/cancel.png" alt="" id="cancel">
+                    </div>
+                </div>
+                <div class="missyou">
+                    <p>
+                        <b>anh iuuu bé</b>
+                    </p>
+                </div>
+            `;
+            const position = getRandomPosition();
+            nav.style.left = `${position.x}px`;
+            nav.style.top = `${position.y}px`;
+            nav.style.position = "absolute"; // Đảm bảo phần tử có thể đặt ở vị trí cụ thể
+            return nav;
+        }
+
+        // Gắn sự kiện click cho nút
+        document.getElementById("btn").addEventListener("click", () => {
+            const numberOfElements = 100; // Số lượng phần tử muốn tạo
+            for (let i = 0; i < numberOfElements; i++) {
+                setTimeout(() => {
+                    const navElement = createNavElement();
+                    document.body.appendChild(navElement);
+                }, 600 * i); // Mỗi phần tử xuất hiện sau 1 giây
+            }
+        });
+    </script>
+</body>
+</html>
